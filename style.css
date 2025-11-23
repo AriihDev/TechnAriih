@@ -1,0 +1,539 @@
+     /* --- VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: #141414;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --accent: #bc75ca; /* Or Luxueux */
+            --accent-glow: rgba(94, 28, 237, 0.621);
+            --border: #27272a;
+            --gap: 1.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none; /* On cache le curseur par défaut pour utiliser notre custom */
+        }
+
+        html {
+            font-size: 100%; /* Base 16px */
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--accent);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        /* Effet Hover du curseur */
+        body.hovering .cursor-outline {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(212, 175, 55, 0.1);
+            border-color: transparent;
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.05rem;
+            color: var(--text-main);
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--accent); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Gradient effect */
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #999);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn:hover {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* --- BENTO GRID PRODUCTS --- */
+        .products {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 Colonnes */
+            grid-auto-rows: 300px; /* Hauteur de base */
+            gap: var(--gap);
+        }
+
+        .bento-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+        }
+
+        .bento-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        /* Gestion des images de fond (Placeholders de qualité) */
+        .bento-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: opacity 0.3s, transform 0.5s;
+            z-index: 0;
+        }
+
+        .bento-item:hover .bento-bg {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+
+        .bento-content {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 1rem;
+            margin: -1.5rem; /* Compensate padding */
+            padding-top: 4rem;
+        }
+
+        .bento-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .bento-content p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .price {
+            color: var(--accent);
+            font-weight: bold;
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        /* Classes Bento Spécifiques */
+        .span-2-cols { grid-column: span 2; }
+        .span-2-rows { grid-row: span 2; }
+
+  /* --- ABOUT SECTION (FIXED: REM UNITS) --- */
+        .about-section {
+            padding: 8rem 2rem;
+            background-color: #0d0d0d;
+            position: relative;
+        }
+
+        .about-container {
+            max-width: 75rem; /* 1200px -> 75rem */
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content {
+            padding-right: 2rem;
+        }
+
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+        
+        .about-content h2 span {
+            color: var(--accent);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            font-size: 1rem;
+            text-align: justify;
+        }
+
+        /* Zone visuelle entièrement en REM */
+        .about-visuals {
+            position: relative;
+            height: 31.25rem; /* 500px -> 31.25rem */
+            width: 100%;
+        }
+
+        .about-img {
+            position: absolute;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 0.625rem 1.875rem rgba(0,0,0,0.5); /* 0 10px 30px -> rem */
+            transition: transform 0.5s ease, z-index 0s;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+            /* Filtre supprimé pour clarté, ou léger : */
+            filter: brightness(0.9); 
+        }
+
+        /* Dimensions en % pour rester fluide */
+        .img-exterior {
+            width: 80%;
+            height: 70%;
+            top: 0;
+            right: 0;
+            z-index: 1;
+        }
+
+        .img-interior {
+            width: 60%;
+            height: 60%;
+            bottom: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        .about-visuals:hover .img-exterior {
+            /* Déplacements légers en rem */
+            transform: translateX(0.6rem) translateY(-0.6rem); 
+            z-index: 3;
+        }
+
+        .about-visuals:hover .img-interior {
+            transform: translateX(-0.6rem) translateY(0.6rem);
+        }
+
+        .about-visuals:hover img {
+            transform: scale(1.05);
+        }
+        /* --- FAQ --- */
+        .faq {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+        
+        .faq-answer {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item:hover .faq-answer {
+            max-height: 100px; /* Simple reveal on hover */
+        }
+
+        /* --- FOOTER --- */
+
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            background-color: rgba(10, 10, 10, 0.95);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+        
+        footer .legal {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        /* --- CHATBOT --- */
+        .chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .chat-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+            transition: transform 0.3s;
+        }
+
+        .chat-btn:hover { transform: scale(1.1); }
+
+        .chat-btn svg { width: 28px; height: 28px; fill: #000; }
+
+        .chat-window {
+            width: 300px;
+            height: 400px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            display: none; /* Caché par défaut */
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .chat-window.active { display: flex; }
+
+        .chat-header {
+            background: #1f1f1f;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-chat { font-size: 1.5rem; line-height: 1; }
+
+        .chat-body {
+            flex: 1;
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            overflow-y: auto;
+        }
+
+        .bot-msg {
+            background: #2a2a2a;
+            padding: 0.8rem;
+            border-radius: 0.8rem 0.8rem 0.8rem 0;
+            margin-bottom: 1rem;
+            display: inline-block;
+            color: #fff;
+        }
+
+        .chat-input-area {
+            padding: 0.8rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: white;
+            outline: none;
+        }
+
+        /* --- RESPONSIVE --- */
+        
+         /* --- RESPONSIVE (FINAL & OPTIMISÉ EN EM) --- */
+        /* 1024px = 64em */
+        @media (max-width: 64em) {
+            .bento-grid { grid-template-columns: repeat(2, 1fr); }
+            
+            .about-container { grid-template-columns: 1fr; gap: 3rem; }
+            .about-content { padding-right: 0; text-align: center; }
+            .about-text p { text-align: center; }
+            
+            .about-visuals { 
+                height: 25rem;
+                width: 100%; 
+                max-width: 37.5rem;
+                margin: 0 auto; 
+            }
+        }
+
+        /* 768px = 48em */
+        @media (max-width: 48em) {
+            html { font-size: 90%; } /* Échelle globale fluide */
+            
+            header { padding: 1rem 1.5rem; }
+            nav { display: none; }
+            
+            .bento-grid { 
+                grid-template-columns: 1fr; 
+                grid-auto-rows: 15.625rem;
+            }
+            
+            /* Reset grid spans for single column */
+            .span-2-cols, .span-2-rows { grid-column: span 1; grid-row: span 1; }
+            
+            .cursor-dot, .cursor-outline { display: none; }
+            * { cursor: auto; }
+
+            /* Ajustement Chatbot Mobile */
+            .chat-widget {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
