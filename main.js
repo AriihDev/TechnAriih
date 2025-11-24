@@ -17,12 +17,43 @@
                 top: `${posY}px`
             }, { duration: 500, fill: "forwards" });
         });
+        
+    document.addEventListener('DOMContentLoaded', () => {
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                // Bascule la classe 'active' sur l'élément FAQ
+                item.classList.toggle('active');
+                
+                // Gère l'affichage/la masquage de la réponse
+                const answer = item.querySelector('.faq-answer');
+                const plusSign = item.querySelector('.faq-question span');
+                
+                if (item.classList.contains('active')) {
+                    // Ouvre la réponse
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                    plusSign.textContent = '–'; // Change le + en -
+                } else {
+                    // Ferme la réponse
+                    answer.style.maxHeight = '0';
+                    plusSign.textContent = '+'; // Change le - en +
+                }
+            });
+        });
+    });
+
+
 
         // Effet quand on survole un élément interactif
         interactiveElements.forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
         });
+        
+        
 
         // --- CHATBOT LOGIC ---
         const chatToggle = document.getElementById('chatToggle');
@@ -38,3 +69,5 @@
         closeChat.addEventListener('click', () => {
             chatWindow.style.display = 'none';
         });
+        
+        
