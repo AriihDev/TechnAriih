@@ -410,7 +410,7 @@
 /* Ouvrir la réponse */
 .faq-item.active .faq-answer {
     padding: 15px 20px 20px; /* Ajouter le padding pour afficher le texte */
-    max-height: 500px; /* Doit être plus grand que le contenu de la réponse */
+    max-height: 700px; /* Doit être plus grand que le contenu de la réponse */
 }
 
 /* Changer le fond de la question ouverte */
