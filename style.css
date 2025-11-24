@@ -354,59 +354,72 @@
         .about-visuals:hover img {
             transform: scale(1.05);
         }
-        /* --- FAQ --- */
-        .faq {
-            padding: 4rem 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-      /* --- Styles de base pour l'accordéon --- */
-.faq-item {
-    border: 1px solid #ccc; /* Bordure légère */
-    margin-bottom: 10px;
-    border-radius: 8px;
-    overflow: hidden; /* IMPORTANT: Cache le contenu par défaut */
-    max-width: 800px; /* Limite la largeur sur grand écran */
-    margin-left: auto;
-    margin-right: auto;
+     
+        /* --- FAQ Général --- */
+.faq {
+    padding: 4rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    /* Le fond de la section est géré par la page principale (probablement noir) */
 }
 
+/* --- Chaque Élément FAQ --- */
+.faq-item {
+    background-color: #111; /* Fond très foncé */
+    border: 1px solid #333; /* Bordure sombre */
+    margin-bottom: 12px;
+    border-radius: 10px;
+    overflow: hidden; /* **ESSENTIEL** pour cacher la réponse */
+}
+
+/* --- La Question (Visible) --- */
 .faq-question {
-    background-color: #f7f7f7;
-    padding: 15px 20px;
+    color: #fff;
+    padding: 16px 20px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 500;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
 .faq-question:hover {
-    background-color: #eee;
+    background-color: #222;
 }
 
+/* --- L'Icône + / - --- */
 .faq-question span {
-    font-size: 1.5em;
-    line-height: 1;
-    margin-left: 10px;
-    transition: transform 0.3s ease;
+    font-size: 1.4em;
+    color: #fff;
+    transition: transform 0.3s;
 }
 
+/* --- La Réponse (Cachée par défaut) --- */
 .faq-answer {
-    background-color: #fff;
+    background-color: #000; /* Fond noir */
+    color: #ccc; /* Texte gris clair */
     padding: 0 20px;
-    max-height: 0; /* Par défaut, la hauteur est 0, c'est ce qui la cache */
+    max-height: 0; /* **ESSENTIEL** pour la cacher */
     overflow: hidden;
-    transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Ajoute l'animation */
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Animation */
 }
 
-/* --- Style lorsque l'item est ACTIF (ouvert) --- */
+/* --- État ACTIF (Quand l'utilisateur clique) --- */
+
+/* Ouvrir la réponse */
 .faq-item.active .faq-answer {
-    padding: 15px 20px; /* Ajoute le padding pour montrer le contenu */
+    padding: 15px 20px 20px; /* Ajouter le padding pour afficher le texte */
+    max-height: 500px; /* Doit être plus grand que le contenu de la réponse */
 }
 
+/* Changer le fond de la question ouverte */
+.faq-item.active .faq-question {
+    background-color: #333;
+}
+
+
+      
 
         /* --- FOOTER --- */
 
