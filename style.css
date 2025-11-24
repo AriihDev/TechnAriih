@@ -512,6 +512,19 @@
                 margin: 0 auto; 
             }
         }
+     
+     /* --- Media Query pour mobile (si nécessaire) --- */
+@media (max-width: 600px) {
+    .section-title {
+        font-size: 2em; /* Titre légèrement plus petit sur mobile */
+    }
+
+    .faq-question {
+        padding: 12px 15px; /* Réduire le padding */
+        font-size: 0.95em;
+    }
+}
+
 
         /* 768px = 48em */
         @media (max-width: 48em) {
