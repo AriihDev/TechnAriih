@@ -25,21 +25,19 @@
             const question = item.querySelector('.faq-question');
             
             question.addEventListener('click', () => {
-                // Bascule la classe 'active' sur l'élément FAQ
-                item.classList.toggle('active');
-                
-                // Gère l'affichage/la masquage de la réponse
                 const answer = item.querySelector('.faq-answer');
                 const plusSign = item.querySelector('.faq-question span');
                 
+                // Bascule la classe 'active'
+                item.classList.toggle('active');
+
+                // Gère l'animation d'ouverture/fermeture et le signe +/-
                 if (item.classList.contains('active')) {
-                    // Ouvre la réponse
-                    answer.style.maxHeight = answer.scrollHeight + "px";
-                    plusSign.textContent = '–'; // Change le + en -
+                    answer.style.maxHeight = answer.scrollHeight + 30 + "px";
+                    plusSign.textContent = '—'; 
                 } else {
-                    // Ferme la réponse
                     answer.style.maxHeight = '0';
-                    plusSign.textContent = '+'; // Change le - en +
+                    plusSign.textContent = '+'; 
                 }
             });
         });
