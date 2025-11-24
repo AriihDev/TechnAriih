@@ -361,31 +361,52 @@
             margin: 0 auto;
         }
 
-        .faq-item {
-            border-bottom: 1px solid var(--border);
-            padding: 1.5rem 0;
-        }
+      /* --- Styles de base pour l'accordéon --- */
+.faq-item {
+    border: 1px solid #ccc; /* Bordure légère */
+    margin-bottom: 10px;
+    border-radius: 8px;
+    overflow: hidden; /* IMPORTANT: Cache le contenu par défaut */
+    max-width: 800px; /* Limite la largeur sur grand écran */
+    margin-left: auto;
+    margin-right: auto;
+}
 
-        .faq-question {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: var(--text-main);
-        }
-        
-        .faq-answer {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
+.faq-question {
+    background-color: #f7f7f7;
+    padding: 15px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
 
-        .faq-item:hover .faq-answer {
-            max-height: 100px; /* Simple reveal on hover */
-        }
+.faq-question:hover {
+    background-color: #eee;
+}
+
+.faq-question span {
+    font-size: 1.5em;
+    line-height: 1;
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+}
+
+.faq-answer {
+    background-color: #fff;
+    padding: 0 20px;
+    max-height: 0; /* Par défaut, la hauteur est 0, c'est ce qui la cache */
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Ajoute l'animation */
+}
+
+/* --- Style lorsque l'item est ACTIF (ouvert) --- */
+.faq-item.active .faq-answer {
+    padding: 15px 20px; /* Ajoute le padding pour montrer le contenu */
+}
+
 
         /* --- FOOTER --- */
 
