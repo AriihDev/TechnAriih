@@ -33,7 +33,7 @@
 
                 // Gère l'animation d'ouverture/fermeture et le signe +/-
                 if (item.classList.contains('active')) {
-                    answer.style.maxHeight = answer.scrollHeight + 30 + "px";
+                    answer.style.maxHeight = answer.scrollHeight + 50 + "px";
                     plusSign.textContent = '—'; 
                 } else {
                     answer.style.maxHeight = '0';
